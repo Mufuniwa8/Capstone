@@ -8,15 +8,15 @@ const {products} = require('../models')
 
 
 const {
-    getAllProducts,
-    getProductsByID,
+    getAllCart,
+    getCartByID,
     insertProducts,
-    deleteProducts,
-    updateProducts
-  } = require("../models/product");
+    deleteCart,
+    updateCart
+  } = require("../models/cart");
   
-  const allProducts = (req, res) => {
-    getAllProducts((error, results) => {
+  const allCart = (req, res) => {
+    getAllCart((error, results) => {
         if (error) {
             res.send(error);
         }
@@ -29,8 +29,8 @@ const {
      
 
 
-  const showAProducts = (req, res) => {
-    getProductsByID(req.params.proID, (error, results) => {
+  const showACart = (req, res) => {
+    getCartByID(req.params.cartID, (error, results) => {
         if (error) {
             res.send(error);
         }
@@ -40,9 +40,9 @@ const {
     });
   };
 
-  const createProducts = (req, res) => {
+  const createCart = (req, res) => {
     const data = req.body;
-    insertProducts(data, (error, results) => {
+    insertCart(data, (error, results) => {
         if (error) {
             res.send(error);
         }
@@ -54,9 +54,9 @@ const {
 
 
 
-  const removeProducts = (req, res) => {
-    const proID = req.params.proID;
-    deleteProducts(proID, (error,results) => {
+  const removeCart = (req, res) => {
+    const proID = req.params.cartID;
+    deleteCart(proID, (error,results) => {
         if (error) {
             res.send(error);
         }
@@ -66,10 +66,10 @@ const {
     });
   };
 
-  const updateProductInfo = (req,res) => {
-    const proID = req.params.proID;
+  const updateCartInfo = (req,res) => {
+    const cartID = req.params.cartID;
     const newData = req.body;
-    updateProducts(proID, newData, (error, results) => {
+    updateCart(cartID, newData, (error, results) => {
             if (error) {
                     res.send(error);
         }
@@ -80,11 +80,11 @@ const {
   };
 
   module.exports = {
-  allProducts,
-  showAProducts,
-  createProducts,
-  removeProducts,
-  updateProductInfo,
+  allCart,
+  showACart,
+  createCart,
+  removeCart,
+  updateCartInfo,
 };
 
 

@@ -1,10 +1,10 @@
 require('dotenv').config();
-const cor = require("cors");
+const cors = require("cors");
 const express = require("express");
 const app = express();
 const database = require("../config/index.js");
 const path = require("path");
-const port = +process.env.PORT || 3300;
+const port = +process.env.PORT || 3302;
 const bodyParser = require("body-parser");
 
 app.use(express.static("./static"));
@@ -14,8 +14,8 @@ app.use(cors());
 
 //user
 
-user.get('/User', (req,res) => {
-    const query = `select userID, firstName, lastName, userRole,userPassword,userProfile  from User;`;
+ const fetchCart = app.get('/cart', (req,res) => {
+    const query = `select cartID, cartImage, cartName, cartColor, cartPrice from cart;`;
     database.query(query, (error, data) => {
      
       if (error) {
@@ -32,16 +32,18 @@ user.get('/User', (req,res) => {
 app.listen(port, () => {
     console.log(`server is running at http://localhost:${port}`);
 });
-app.get("/User/:id", (req, res) => {
-    const query = `select proID, proImage, proName, proColor, proPrice, proStock, proCategory from products;`;
+app.get("/cart/:id", (req, res) => {
+    const query = `select cartID, cartImage, cartName, cartColor, cartPrice from cart where cartID = ${req.params.id};`;
     database.query(query, (error, data) => {
         if (error) throw error;
         res.json({status: res.statusCode, results: data});
     });
 });
 
-app.patch('/User/:id', (req,res) => {
- const query = `update user set? where userID = ?;`;
+
+
+app.patch('/cart/:id', (req,res) => {
+ const query = `update cart set? where cartID = ?;`;
  database.query(query, [req.body, req.params.id], (error) => {
     if (error) throw error
     res.json(
@@ -51,8 +53,8 @@ app.patch('/User/:id', (req,res) => {
  })   
 });
 
-app.delete('/User/:id', (req, res) => {
-    const query = `delete from User wher userID = ${req.params.id};`
+app.delete('/cart/:id', (req, res) => {
+    const query = `delete from cart where cartID = ${req.params.id};`
     database.query(query, (error) => {
         if (error) throw error;
         res.json(
@@ -65,18 +67,19 @@ app.delete('/User/:id', (req, res) => {
 })
 
 
-//end of user 
+// //end of user 
 
-//products
+// //products
 
-products.get('/products', (req,res) => {
-    const query = `select proID, proImage, proName, proColor, proPrice, proStock, proCategory from products;`;
-    database.query(query, (error, data) => {
-        if (error) {
-            res.status(404).json({message: "Error! try again"});
-        }
-        else {
-            res.status(200).json({results: data});
-        }
-    });
-});
+// products.get('/products', (req,res) => {
+//     const query = `select proID, proImage, proName, proColor, proPrice, proStock, proCategory from products;`;
+//     database.query(query, (error, data) => {
+//         if (error) {
+//             res.status(404).json({message: "Error! try again"});
+//         }
+//         else {
+//             res.status(200).json({results: data});
+//         }
+//     });
+// });
+module.exports = fetchCart
