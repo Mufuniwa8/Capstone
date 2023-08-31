@@ -1,27 +1,27 @@
 const express = require('express')
+const bcrypt = require('bcrypt')
 const routes = express.Router()
 const bodyParser = require('body-parser')
 const path = require('path')
-const {products} = require('../models')
+const products = require('../models/product')
 
 
 
 
 const {
-    getAllProducts,
-    getProductsByID,
-    insertProducts,
-    deleteProducts,
-    updateProducts
+    fetchProducts,
+    fetchProductsByID,
+    fetchInsertProducts,
+    fetchDeleteProducts,
   } = require("../models/product");
   
   const allProducts = (req, res) => {
-    getAllProducts((error, results) => {
+    fetchProducts((error, results) => {
         if (error) {
-            res.send(error);
+            res.status(500).json({error: "internal error"});
         }
         else{
-            res.json(results);
+            res.status(200).json(results);
         }
     });
   };
@@ -30,7 +30,7 @@ const {
 
 
   const showAProducts = (req, res) => {
-    getProductsByID(req.params.proID, (error, results) => {
+    fetchProductsByID(req.params.proID, (error, results) => {
         if (error) {
             res.send(error);
         }
@@ -42,7 +42,7 @@ const {
 
   const createProducts = (req, res) => {
     const data = req.body;
-    insertProducts(data, (error, results) => {
+    fetchInsertProducts(data, (error, results) => {
         if (error) {
             res.send(error);
         }
@@ -56,7 +56,7 @@ const {
 
   const removeProducts = (req, res) => {
     const proID = req.params.proID;
-    deleteProducts(proID, (error,results) => {
+    fetchDeleteProducts(proID, (error,results) => {
         if (error) {
             res.send(error);
         }
@@ -69,7 +69,7 @@ const {
   const updateProductInfo = (req,res) => {
     const proID = req.params.proID;
     const newData = req.body;
-    updateProducts(proID, newData, (error, results) => {
+    fetchUpdateProducts(proID, newData, (error, results) => {
             if (error) {
                     res.send(error);
         }

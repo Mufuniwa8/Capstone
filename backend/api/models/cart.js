@@ -1,59 +1,62 @@
-require('dotenv').config();
-const cors = require("cors");
-const express = require("express");
-const app = express();
+// require('dotenv').config();
+// const cors = require("cors");
+// const express = require("express");
+// const app = express();
 const database = require("../config/index.js");
-const path = require("path");
-const port = +process.env.PORT || 3302;
-const bodyParser = require("body-parser");
+// const path = require("path");
+// // const port = +process.env.PORT || 3302;
+// const bodyParser = require("body-parser");
 
-app.use(express.static("./static"));
-app.use(bodyParser.json());
-app.use(cors());
+// app.use(express.static("./static"));
+// app.use(bodyParser.json());
+// app.use(cors());
 
 
 //user
 
- const fetchCart = app.get('/cart', (req,res) => {
+const fetchCart = (result) => {
     const query = `select cartID, cartImage, cartName, cartColor, cartPrice from cart;`;
-    database.query(query, (error, data) => {
+    database.query(query, (error, res) => {
      
-      if (error) {
-        res.status(404).json({ message: "Error try again" });
-      }
-      else {
-       res.status(200).json({ results: data });
-      }
+        if (error) {
+            console.log(error);
+            result(error, null);
+            return;
+        } else {
+            result(null, res);
+        }
     });
-});
+};
 
 
 
-app.listen(port, () => {
-    console.log(`server is running at http://localhost:${port}`);
-});
-app.get("/cart/:id", (req, res) => {
+// app.listen(port, () => {
+//     console.log(`server is running at http://localhost:${port}`);
+// });
+const fetchCartByID = (id, res) => {
     const query = `select cartID, cartImage, cartName, cartColor, cartPrice from cart where cartID = ${req.params.id};`;
-    database.query(query, (error, data) => {
+    database.query(query, [id], (error, data) => {
         if (error) throw error;
         res.json({status: res.statusCode, results: data});
     });
-});
+};
 
 
 
-app.patch('/cart/:id', (req,res) => {
+const fetchInsertCart = (req,res) => {
  const query = `update cart set? where cartID = ?;`;
  database.query(query, [req.body, req.params.id], (error) => {
-    if (error) throw error
-    res.json(
-        {status: res.statusCode,
-        message:"The user record is update."}
-    )
+   if (error) {
+            console.log(error);
+            result(error, null);
+            return;
+        } else {
+            result(null, res);
+        }
  })   
-});
+};
 
-app.delete('/cart/:id', (req, res) => {
+const fetchDeleteCart = (req, res) => {
     const query = `delete from cart where cartID = ${req.params.id};`
     database.query(query, (error) => {
         if (error) throw error;
@@ -64,7 +67,7 @@ app.delete('/cart/:id', (req, res) => {
             }
         )
     })
-})
+}
 
 
 // //end of user 
@@ -82,4 +85,9 @@ app.delete('/cart/:id', (req, res) => {
 //         }
 //     });
 // });
-module.exports = fetchCart
+module.exports = {
+    fetchCart,
+    fetchCartByID,
+    fetchInsertCart,
+    fetchDeleteCart,
+};

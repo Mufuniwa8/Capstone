@@ -2,18 +2,18 @@ const express = require('express')
 const routes = express.Router()
 const bodyParser = require('body-parser')
 const path = require('path')
-const {user} = require('../models')
+const user = require('../models/user')
 
 const {
-    getAllUser,
-    getUserByID,
-    insertUser,
-    deleteUser,
-    updateUser
+    fetchUser,
+    fetchUserByID,
+    fetchInsertUser,
+    fetchDeleteUser,
+    fetchUpdateUser
   } = require("../models/user");
   
   const allUser = (req, res) => {
-    getAllUser((error, results) => {
+    fetchUser((error, results) => {
         if (error) {
             res.send(error);
         }
@@ -27,7 +27,7 @@ const {
 
 
   const showAUser = (req, res) => {
-    getUserByID(req.params.userID, (error, results) => {
+    fetchUserByID(req.params.userID, (error, results) => {
         if (error) {
             res.send(error);
         }
@@ -39,7 +39,7 @@ const {
 
   const createUser = (req, res) => {
     const data = req.body;
-    insertUser(data, (error, results) => {
+    fetchInsertUser(data, (error, results) => {
         if (error) {
             res.send(error);
         }
@@ -52,8 +52,8 @@ const {
 
 
   const removeUser = (req, res) => {
-    const proID = req.params.userID;
-    deleteUser(userID, (error,results) => {
+    const userID = req.params.userID;
+    fetchDeleteUser(userID, (error,results) => {
         if (error) {
             res.send(error);
         }
@@ -66,7 +66,7 @@ const {
   const updateUserInfo = (req,res) => {
     const userID = req.params.userID;
     const newData = req.body;
-    updateUser(userID, newData, (error, results) => {
+    fetchUpdateUser(userID, newData, (error, results) => {
             if (error) {
                     res.send(error);
         }

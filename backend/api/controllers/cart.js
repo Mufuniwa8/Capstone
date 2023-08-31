@@ -2,21 +2,21 @@ const express = require('express')
 const routes = express.Router()
 const bodyParser = require('body-parser')
 const path = require('path')
-const {products} = require('../models')
+const {products} = require('../models/cart')
 
 
 
 
 const {
-    getAllCart,
-    getCartByID,
-    insertProducts,
-    deleteCart,
-    updateCart
+    fetchCart,
+    fetchCartByID,
+    fetchInsertCart,
+    fetchDeleteCart,
+    FetchUpdateCart
   } = require("../models/cart");
   
   const allCart = (req, res) => {
-    getAllCart((error, results) => {
+    fetchCart((error, results) => {
         if (error) {
             res.send(error);
         }
@@ -30,7 +30,7 @@ const {
 
 
   const showACart = (req, res) => {
-    getCartByID(req.params.cartID, (error, results) => {
+    fetchCartByID(req.params.cartID, (error, results) => {
         if (error) {
             res.send(error);
         }
@@ -42,7 +42,7 @@ const {
 
   const createCart = (req, res) => {
     const data = req.body;
-    insertCart(data, (error, results) => {
+    fetchInsertCart(data, (error, results) => {
         if (error) {
             res.send(error);
         }
@@ -55,8 +55,8 @@ const {
 
 
   const removeCart = (req, res) => {
-    const proID = req.params.cartID;
-    deleteCart(proID, (error,results) => {
+    const cartID = req.params.cartID;
+    fetchDeleteCart(cartID, (error,results) => {
         if (error) {
             res.send(error);
         }
@@ -69,7 +69,7 @@ const {
   const updateCartInfo = (req,res) => {
     const cartID = req.params.cartID;
     const newData = req.body;
-    updateCart(cartID, newData, (error, results) => {
+    FetchUpdateCart(cartID, newData, (error, results) => {
             if (error) {
                     res.send(error);
         }
