@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 const cors = require('cors');
-const port = +process.env.PORT || 3301;
+const port = +process.env.PORT || 2003;
 
 //Routes requirement
 const routes = require("./routes/index");
