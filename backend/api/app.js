@@ -11,6 +11,13 @@ const port = +process.env.PORT || 3301;
 //Routes requirement
 const routes = require("./routes/index");
 
+app.use((req, res, next) =>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "*");
+    res.header("Access-Control-Allow-Headers", "*");
+    next();
+})
 
 app.use(express.json());
 app.use(cors());
