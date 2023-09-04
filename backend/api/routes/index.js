@@ -11,7 +11,7 @@ const {
 
 router.get("/products", allProducts);
 
-router.get("/products/:proID", showAProducts);
+router.get("/products/:id", showAProducts);
 
 router.post("/products", createProducts);
 

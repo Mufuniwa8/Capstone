@@ -25,8 +25,8 @@ const fetchUser = (result) => {
     });
 };
 
-const fetchUserByID = (req, res) => {
-    const query = `select userID, firstName, lastName, userRole, userPassword, userProfile from User where userID = ${req.params.id};`;
+const fetchUserByID = (id, res) => {
+    const query = `select userID, firstName, lastName, userRole, userPassword, userProfile from User where userID = ${id};`;
     database.query(query, (error, data) => {
         if (error) throw error;
         res.json({status: res.statusCode, results: data});

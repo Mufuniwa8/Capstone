@@ -27,7 +27,7 @@ const {
 
 
   const showAUser = (req, res) => {
-    fetchUserByID(req.params.userID, (error, results) => {
+    fetchUserByID(req.params.userID, res, (error, results) => {
         if (error) {
             res.send(error);
         }

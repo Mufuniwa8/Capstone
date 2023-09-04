@@ -30,7 +30,7 @@ const {
 
 
   const showACart = (req, res) => {
-    fetchCartByID(req.params.cartID, (error, results) => {
+    fetchCartByID(req.params.cartID, res, (error, results) => {
         if (error) {
             res.send(error);
         }

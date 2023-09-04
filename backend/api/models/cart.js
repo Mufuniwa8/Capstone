@@ -34,7 +34,7 @@ const fetchCart = (result) => {
 //     console.log(`server is running at http://localhost:${port}`);
 // });
 const fetchCartByID = (id, res) => {
-    const query = `select cartID, cartImage, cartName, cartColor, cartPrice from cart where cartID = ${req.params.id};`;
+    const query = `select cartID, cartImage, cartName, cartColor, cartPrice from cart where cartID = ${id};`;
     database.query(query, [id], (error, data) => {
         if (error) throw error;
         res.json({status: res.statusCode, results: data});

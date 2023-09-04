@@ -30,13 +30,13 @@ const {
 
 
   const showAProducts = (req, res) => {
-    fetchProductsByID(req.params.proID, (error, results) => {
+    fetchProductsByID(req.params.id, res, (error, results) => {
         if (error) {
             res.send(error);
         }
-        else{
-            res.json(results);
-        }
+        // else{
+        //     // res.json(results);
+        // }
     });
   };
 
@@ -69,7 +69,7 @@ const {
   const updateProductInfo = (req,res) => {
     const proID = req.params.proID;
     const newData = req.body;
-    fetchProducts(proID, newData, (error, results) => {
+    fetchUpdateProducts(proID, newData, (error, results) => {
             if (error) {
                     res.send(error);
         }
