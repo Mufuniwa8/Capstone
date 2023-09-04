@@ -9,14 +9,14 @@ const products = require('../models/product')
 
 
 const {
-    getProducts,
+    fetchProducts,
     fetchProductsByID,
     fetchInsertProducts,
     fetchDeleteProducts,
   } = require("../models/product");
   
   const allProducts = (req, res) => {
-    getProducts((error, results) => {
+    fetchProducts((error, results) => {
         if (error) {
             res.status(500).json({error: "internal error"});
         }
@@ -69,7 +69,7 @@ const {
   const updateProductInfo = (req,res) => {
     const proID = req.params.proID;
     const newData = req.body;
-    fetchUpdateProducts(proID, newData, (error, results) => {
+    fetchProducts(proID, newData, (error, results) => {
             if (error) {
                     res.send(error);
         }

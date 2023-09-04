@@ -2,7 +2,7 @@
 // const cors = require("cors");
 // const express = require("express");
 // const app = express();
-const database = require("../config/index.js");
+const db = require("../config/index.js");
 // const path = require("path");
 // // const port = +process.env.PORT || 3300;
 // const bodyParser = require("body-parser");
@@ -14,9 +14,9 @@ const database = require("../config/index.js");
 
 //user
 
-const getProducts = (result) => {
+const fetchProducts = (result) => {
     const query = "SELECT * FROM products";
-    database.query(query, (error, res) => {
+    db.query(query, (error, res) => {
         if (error) {
             console.log(error);
             result(error, null);
@@ -34,7 +34,7 @@ const getProducts = (result) => {
 // });
 const fetchProductsByID = (req, res) => {
     const query = `select proID, proImage, proName, proColor, proPrice, proStock, proCategory from products where proID = ${req.params.id};`;
-    database.query(query, (error, data) => {
+    db.query(query, (error, data) => {
         if (error) throw error;
         res.json({status: res.statusCode, results: data});
 
@@ -45,7 +45,7 @@ const fetchProductsByID = (req, res) => {
 
 const fetchInsertProducts = (req,res) => {
  const query = `update products set? where proID = ?;`;
- database.query(query, [req.body, req.params.id], (error) => {
+ db.query(query, [req.body, req.params.id], (error) => {
     if (error) throw error
     res.json(
         {status: res.statusCode,
@@ -56,7 +56,7 @@ const fetchInsertProducts = (req,res) => {
 
 const fetchDeleteProducts = (req, res) => {
     const query = `delete from products where proID = ${req.params.id};`
-    database.query(query, (error) => {
+    db.query(query, (error) => {
         if (error) throw error;
         res.json(
             {
@@ -84,7 +84,7 @@ const fetchDeleteProducts = (req, res) => {
 //     });
 // });
 module.exports = {
-    getProducts,
+    fetchProducts,
     fetchProductsByID,
     fetchInsertProducts,
     fetchDeleteProducts,
