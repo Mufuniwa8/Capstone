@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
+import axios from 'axios'
 
-const MyURL ="https://capstone-api-r3rp.onrender.com/"
+const myURL ="https://capstone-api-r3rp.onrender.com/"
 
 export default createStore({
   state: {
@@ -23,8 +24,8 @@ export default createStore({
   actions: {
     async fetchProducts(context) {
       try {
-        let res = await fetch(`${MyURL}products`);
-        let {products} = await res.json()
+        let res = await axios.get(`${myURL}products`);
+        let products = await res.data
         context.commit("fetchProducts", products)
       }
       catch(error) {alert(error.message)}

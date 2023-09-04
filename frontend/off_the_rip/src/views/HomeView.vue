@@ -158,6 +158,7 @@ align-items: center; */
   width: 250px;
   height: 300px;
   margin: 20px;
+  object-fit: cover;
   position: relative;
 }
 .home-btn {
