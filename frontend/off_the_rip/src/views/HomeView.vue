@@ -13,6 +13,58 @@
       </div>
     </div>
   </div>
+  <h2>Top selling sneakers of the month</h2>
+  <div class="monthly-pro">
+    <div class="selling">
+      <img
+        class="sell-img"
+        src="https://i.postimg.cc/029WNL5d/IMG-2188.jpg"
+        alt=""
+      />
+      <p>New Balance 550 <br> Black & white <br> R2199,99</p>
+      <div class="home-btn">
+        <div>
+          <button class="see-more">See more</button>
+        </div>
+        <div class="see-more">
+          <button class="see-more">+Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="selling-2">
+      <img
+        class="sell-img"
+        src="https://i.postimg.cc/029WNL5d/IMG-2188.jpg"
+        alt=""
+      />
+      <p>Nike Jordan 4s <br> Black & white <br> R3499,99</p>
+      
+      <div class="home-btn">
+        <div>
+          <button class="see-more">See more</button>
+        </div>
+        <div class="see-more">
+          <button class="see-more">+Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="selling-3">
+      <img
+        class="sell-img"
+        src="https://i.postimg.cc/029WNL5d/IMG-2188.jpg"
+        alt=""
+      />
+      <p>Nike M2K Tekno <br> white <br> R3000,00</p>
+      <div class="home-btn">
+        <div>
+          <button class="see-more">See more</button>
+        </div>
+        <div class="see-more">
+          <button class="see-more">+Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style>
@@ -25,7 +77,7 @@
    margin-right: 500px !important;
 } */
 .ad-text {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   position: relative;
   background-color: white;
   width: 500px;
@@ -60,13 +112,64 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  text-decoration: none;
+  margin-bottom: auto;
 }
 .btn-products {
-text-decoration: none;
+  /* text-decoration: none; */
+  text-align: center;
   width: 150px;
   height: 50px;
+  margin-left: 165px;
   background-color: rgba(154, 13, 13, 1);
+  /* justify-content: center;
+align-items: center; */
+}
+
+.monthly-pro {
+  /* border: 2px solid black; */
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
   justify-content: center;
-align-items: center;
+  gap: 160px;
+  padding: 10px;
+  margin: 50px;
+}
+.selling {
+  /* border: 2px solid black; */
+  width: 300px;
+  height: 500px;
+  background-color: rgba(217, 217, 217, 1);
+}
+.selling-2 {
+  /* border: 2px solid black; */
+  width: 300px;
+  height: 500px;
+  background-color: rgba(217, 217, 217, 1);
+}
+.selling-3 {
+  /* border: 2px solid black; */
+  width: 300px;
+  height: 500px;
+  background-color: rgba(217, 217, 217, 1);
+}
+.sell-img {
+  width: 250px;
+  height: 300px;
+  margin: 20px;
+  position: relative;
+}
+.home-btn {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.see-more {
+  width: 100px;
+  background-color: rgba(154, 13, 13, 1);
+  color: white;
 }
 </style>
