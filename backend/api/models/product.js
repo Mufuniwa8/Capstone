@@ -14,7 +14,7 @@ const database = require("../config/index.js");
 
 //user
 
-const fetchProducts = (result) => {
+const getProducts = (result) => {
     const query = "SELECT * FROM products";
     database.query(query, (error, res) => {
         if (error) {
@@ -84,7 +84,7 @@ const fetchDeleteProducts = (req, res) => {
 //     });
 // });
 module.exports = {
-    fetchProducts,
+    getProducts,
     fetchProductsByID,
     fetchInsertProducts,
     fetchDeleteProducts,

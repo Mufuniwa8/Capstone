@@ -9,14 +9,14 @@ const products = require('../models/product')
 
 
 const {
-    fetchProducts,
+    getProducts,
     fetchProductsByID,
     fetchInsertProducts,
     fetchDeleteProducts,
   } = require("../models/product");
   
   const allProducts = (req, res) => {
-    fetchProducts((error, results) => {
+    getProducts((error, results) => {
         if (error) {
             res.status(500).json({error: "internal error"});
         }
