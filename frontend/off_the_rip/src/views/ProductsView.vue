@@ -1,77 +1,116 @@
 <template>
+  <div class="function-container">
+    <div class="filter">
+      <button
+        type="button"
+        class="btn"
+        :class="{'active-button': selectedFilter === 'all'}"
+        @click="selectFilter('all')"
+      >
+        All
+      </button>
 
-<div class="filter">
+      <button
+        type="button"
+        class="btn"
+        :class="{'active-button': selectedFilter === 'men'}"
+        @click="selectFilter('men')"
+      >
+        Men
+      </button>
+      <button
+        type="button"
+        class="btn"
+        :class="{'active-button': selectedFilter === 'women'}"
+        @click="selectFilter('women')"
+      >
+        Women
+      </button>
+      <button
+        type="button"
+        class="btn"
+        :class="{'active-button': selectedFilter === 'Junior'}"
+        @click="selectFilter('Junior')"
+      >
+        Juniors
+      </button>
+    </div>
 
-  <button
-      type="button"
-      class="filters"
-      :class="{ 'active-btn': selectedFilter === 'all' }"
-      @click="selectFilter('all')"
-    >
-      All
-    </button>
-    <button
-      type="button"
-      class="filters"
-      :class="{ 'active-btn': selectedFilter === 'Men' }"
-      @click="selectFilter('all')"
-    >
-      Men
-    </button>
-    <button
-      type="button"
-      class="filters"
-      :class="{ 'active-btn': selectedFilter === 'Women' }"
-      @click="selectFilter('Women')"
-    >
-      Women
-    </button>
-    <button
-      type="button"
-      class="filters"
-      :class="{ 'active-btn': selectedFilter === 'Juniors' }"
-      @click="selectFilter('Juniors')"
-    >
-      Juniors
-    </button>
-</div>
+    <div class="search">
+      <input class="bar-search" type="text" v-model="searchQuery" />
+    </div>
+    <div class="sort">
+      <select name="" class="sort-pro" v-model="selectedSort">
+        <option value="Price-high">Sort high to low</option>
+        <option value="Price-low">Sort low to high</option>
+        <option value="alphabetical">Sort by A-Z</option>
+      </select>
+    </div>
+  </div>
 
-    <div class="products-container">
-      <div class="products" v-for="pro in products" :key="pro.proID">
-      <img
-        class="pro-img"
-        :src="pro.proImage"
-        :alt="pro.img"
-      />
+  <div class="products-container">
+    <div class="products" v-for="pro in filteredProducts" :key="pro.proID">
+      <img class="pro-img" :src="pro.proImage" :alt="pro.img" />
       <p>{{ pro.proName }} <br> {{ pro.proColor }} <br> {{ pro.proPrice }}</p>
       <div class="pro-btn">
         <div>
-          <button class="see-more">See more</button>
+          <router-link class="see-more" to="/single">See More</router-link>
+          <!-- <router-link class="see-more">See more</route-link> -->
         </div>
         <div class="see-more">
           <button class="see-more">+Cart</button>
         </div>
       </div>
     </div>
-    </div>
-  </template>
-
+  </div>
+</template>
 
 <script>
-
 export default {
+  data() {
+    return {
+      selectedFilter: 'all',
+      selectedSort: 'alphabetical',
+      searchQuery: '',
+    };
+  },
   computed: {
     products() {
-      return this.$store.state.products
+      return this.$store.state.products;
+    },
+    filteredProducts() {
+      let filtered = [...this.products];
+
+      if (this.selectedFilter !== 'all') {
+        filtered = filtered.filter((pro) => pro.proCategory === this.selectedFilter);
+      }
+
+      if (this.searchQuery) {
+        const searchTerm = this.searchQuery.toLowerCase();
+        filtered = filtered.filter(
+          (pro) =>
+            pro.proName.toLowerCase().includes(searchTerm) ||
+            pro.proColor.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      if (this.selectedSort === 'alphabetical') {
+        filtered.sort((a, b) => a.proName.localeCompare(b.proName));
+      } else if (this.selectedSort === 'Price-high') {
+        filtered.sort((a, b) => b.proPrice - a.proPrice);
+      } else if (this.selectedSort === 'Price-low') {
+        filtered.sort((a, b) => a.proPrice - b.proPrice);
+      }
+
+      return filtered;
     },
   },
-  mounted() {
-    this.$store.dispatch("fetchProducts")
-  }
-}
-
-
-
+  methods: {
+    selectFilter(filter) {
+      this.selectedFilter = filter;
+    },
+  },
+};
 </script>
 
 <style>
@@ -107,6 +146,14 @@ export default {
   width: 100px;
   background-color: rgba(154, 13, 13, 1);
   color: white;
+}
+.function-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 20px;
 }
 
 </style>

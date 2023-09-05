@@ -12,6 +12,10 @@ export default {
     NavbarComp,
     FooterComp,
   },
+  mounted() {
+    this.$store.dispatch("fetchProducts")
+  }
+  
 };
 </script>
 

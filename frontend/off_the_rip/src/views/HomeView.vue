@@ -67,6 +67,17 @@
   </div>
 </template>
 
+<script>
+export default {
+
+  computed: {
+    Products() {
+      return this.$store.state.products
+    }
+  }
+}
+</script>
+
 <style>
 /* .ad-img {
   padding: 15px;
