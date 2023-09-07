@@ -24,6 +24,7 @@
             <router-link class="nav-comp" to="/">Home</router-link>
             <router-link class="nav-comp" to="/about">About</router-link>
             <router-link class="nav-comp" to="/products">Products</router-link>
+            <!-- <router-link to="/product">See more</router-link> -->
             <router-link class="nav-comp" to="/contact">Contact-Us</router-link>
             <router-link class="nav-comp" to="/admin">Admin</router-link>
             <!-- <a class="nav-link active" aria-current="page" href="#">Home</a>
