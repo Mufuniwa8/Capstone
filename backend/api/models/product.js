@@ -38,13 +38,35 @@ const fetchProductsByID = (id, res) => {
   });
 };
 
-const fetchInsertProducts = (req, res) => {
-  const query = `update products set? where proID = ?;`;
-  db.query(query, [req.body, req.params.id], (error) => {
-    if (error) throw error;
-    res.json({ status: res.statusCode, message: "The user record is update." });
+const fetchInsertProducts = (products, res) => {
+  const query = "INSERT INTO products (proImage, proName, proColor, proPrice, proStock, proCategory) VALUES (?, ?, ?, ?, ?, ?)";
+  const values = [
+    products.proImage,
+    products.proName,
+    products.proColor,
+    products.proPrice,
+    products.proStock,
+    products.proCategory,
+  ];
+
+  db.query(query, values, (error, data) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({status: 500, message: "Could'nt add product"});
+    }
+    else {
+      res.status(201).json({status: 201, message: "New product has been add"});
+    }
   });
 };
+
+// const fetchInsertProducts = (req, res) => {
+//   const query = `update products set? where proID = ?;`;
+//   db.query(query, [req.body, req.params.id], (error) => {
+//     if (error) throw error;
+//     res.json({ status: res.statusCode, message: "The user record is update." });
+//   });
+// };
 
 const fetchDeleteProducts = (req, res) => {
   const query = `delete from products where proID = ${req.params.id};`;
