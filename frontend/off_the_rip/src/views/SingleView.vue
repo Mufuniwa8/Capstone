@@ -20,7 +20,7 @@ export default {
     return this.$store.state.product;
   },
   id() {
-    return this.$store.params.id;
+    return this.$store.param.id;
   },
 },
 mounted() {

@@ -49,6 +49,7 @@ const routes = [
     name: "product",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/SingleView.vue"),
+      props: true,
   },
 ];
 

@@ -5,7 +5,7 @@ const myURL ="https://capstone-api-r3rp.onrender.com/"
 
 export default createStore({
   state: {
-    products: null,
+    products: [],
     product: null,
     User: null,
     cart: null,
@@ -36,7 +36,7 @@ export default createStore({
     },
     async fetchProduct(context, id) {
       try {
-        let res = await axios.get(`${myURL}product/${id}`);
+        let res = await axios.get(`${myURL}products/${id}`);
         let product = await res.data
         context.commit("fetchProduct", product)
       }

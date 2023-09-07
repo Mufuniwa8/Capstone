@@ -54,7 +54,7 @@
       <p>{{ pro.proName }} <br> {{ pro.proColor }} <br> {{ pro.proPrice }}</p>
       <div class="pro-btn">
         <div>
-          <router-link class="see-more" :to="{name: 'product', params:{id: pro.proId}}">See More</router-link>
+          <router-link class="see-more" :to="{name: 'products', param:{id: pro.proId}}">See More</router-link>
           <!-- <router-link class="see-more">See more</route-link> -->
         </div>
         <div class="see-more">
