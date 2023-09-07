@@ -18,10 +18,10 @@ export default createStore({
     fetchProduct(state,product) {
       state.product = product;
     },
-    getUser(state,User) {
+    fetchUser(state,User) {
       state.User = User;
     },
-    getCart(state,cart) {
+    fetchCart(state,cart) {
       state.cart = cart;
     }
   },
@@ -42,6 +42,22 @@ export default createStore({
       }
       catch(error) {alert(error.message)}
     },
+    async fetchUser(context) {
+      try {
+        let res = await axios.get(`${myURL}User`);
+        let User = await res.data
+        context.commit("fetchUser", User)
+      }
+      catch(error) {alert(error.message)}
+    },
+    async fetchCart(context) {
+      try {
+        let res = await axios.get(`${myURL}cart`);
+        let cart = await res.data
+        context.commit("fetchCart", cart)
+      }
+      catch(error) {alert(error.message)}
+    }
   },
  
 })
