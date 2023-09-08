@@ -38,45 +38,63 @@ const fetchProductsByID = (id, res) => {
   });
 };
 
-const fetchInsertProducts = (products, res) => {
-  const query = "INSERT INTO products (proImage, proName, proColor, proPrice, proStock, proCategory) VALUES (?, ?, ?, ?, ?, ?)";
-  const values = [
-    products.proImage,
-    products.proName,
-    products.proColor,
-    products.proPrice,
-    products.proStock,
-    products.proCategory,
-  ];
 
-  db.query(query, values, (error, data) => {
+
+const fetchInsertProducts = (data, result) => {
+  db.query("INSERT INTO products SET ?;", [data], (error,results) => {
     if (error) {
       console.log(error);
-      res.status(500).json({status: 500, message: "Could'nt add product"});
+      result(error, null);
     }
-    else {
-      res.status(201).json({status: 201, message: "New product has been add"});
+    else{
+      result(null, results);
     }
   });
 };
+  
+const updateProductInfo = (id, data, result) => {
+  db.query("UPDATE products SET proImage = ?, proName = ?, proColor = ?, proPrice = ?, proStock = ?, proCategory =?", 
+  [
+    data.proImage,
+    data.proName,
+    data.proColor,
+    data.proPrice,
+    data.proStock,
+    data.proCategory,
+    id
+  ],
+  (error, results) => {
+    if (error) {
+      console.log(error);
+      result({ error: "Product not updated"}, null);
+    }
+    else {
+      result(null, results);
+    }
+  }
+  )
+}
+  // const query = 'UPDATE products SET ? WHERE proID = ?';
+  // db.query(query, [req.body, productId], (error) => {
+  //   if (error) {
+  //     console.error('Database error:', error);
+  //     return res.status(500).json({ error: 'An error occurred while updating the product.' });
+  //   }
+  //   res.json({ status: res.statusCode, message: 'The user record is updated.' });
+  // });
 
-// const fetchInsertProducts = (req, res) => {
-//   const query = `update products set? where proID = ?;`;
-//   db.query(query, [req.body, req.params.id], (error) => {
-//     if (error) throw error;
-//     res.json({ status: res.statusCode, message: "The user record is update." });
-//   });
-// };
 
-const fetchDeleteProducts = (req, res) => {
-  const query = `delete from products where proID = ${req.params.id};`;
-  db.query(query, (error) => {
-    if (error) throw error;
-    res.json({
-      status: res.statusCode,
-      message: "The user record has been deleted.",
-    });
-  });
+
+const fetchDeleteProducts = (id, result) => {
+ db.query("DELETE FROM products WHERE proID = ?", [id], (error, results) => {
+  if (error) {
+    console.log(error);
+    results(error, null);
+  }
+  else{
+    result(null, results);
+  }
+ });
 };
 
 // //end of user
@@ -99,4 +117,5 @@ module.exports = {
   fetchProductsByID,
   fetchInsertProducts,
   fetchDeleteProducts,
+  updateProductInfo
 };

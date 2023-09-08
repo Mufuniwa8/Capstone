@@ -33,37 +33,105 @@ const fetchUserByID = (id, res) => {
     });
 };
 
-const fetchInsertUser = (req,res) => {
-    const query = `update User set? where userID = ?;`;
-    database.query(query, [req.body, req.params.id], (error) => {
-       if (error) throw error
-       res.json(
-           {status: res.statusCode,
-           message:"The user record is update."}
-       )
-    })   
+const fetchInsertUser = (data,result) => {
+    database.query("INSERT INTO User SET?;", [data], (error, results) => {
+       if (error) {
+        console.log(error);
+        result(error, null);
+       }
+       else {
+        result(null, results);
+       }
+    });
    };
 
-const fetchDeleteUser = (req, res) => {
-    const query = `delete from User where userID = ${req.params.id};`
-    database.query(query, (error) => {
-        if (error) throw error;
-        res.json(
-            {
-                status: res.statusCode,
-                message: "The user record has been deleted."
+const fetchDeleteUser = (id, result) => {
+    database.query("delete from User where userID = ?",[id], (error, results) => {
+        if (error) {
+            console.log(error);
+            result(error, null);
+        }
+        else{
+            result(null, results);
+        }
+    });
+    };
+
+    const updateUserInfo = (id, data, result) => {
+        database.query("UPDATE User SET firstName = ?, lastName = ?, userRole = ?, userPassword = ?, userProfile = ?",
+        [
+            data.firstName,
+            data.lastName,
+            data.userRole,
+            data.userPassword,
+            data.userProfile,
+            id,
+        ],
+        (error, results) => {
+            if (error) {
+                console.log(error);
+                result({ error: "Could'nt update user"}, null)
             }
-        )
+            else {
+                result(null, results);
+            }
+        }
+        );
+    };
+
+    //register
+    const registerUser = (req, res) => {
+        {}
+    }
+    //end of register
+
+const loginUser = (req, res) => {
+    const { email, userPassword } = req.body;
+    const query = `Select firstName, lastName, userRole, userRole, userProfile from User where email = '${email}'`;
+    database.query(query, async (error, results) => {
+        if (error) throw error;
+        if (!results?.length) {
+            res.json({
+                status: res.statusCode,
+                message: "Invalid email",
+            });
+        }
+        else {
+            await compare(userPassword, result[0].userPassword, (cError, cResult) => {
+                if (cError) throw cError;
+                const token = createToken({
+                    email,
+                    userPassword,
+                });
+                res.cookie("ApprovedUser", token, {
+                    maxAge: 100,
+                    httpOnly: true,
+                });
+                if (cResults) {
+                    res.json({
+                        message: "enter another token",
+                        token,
+                        results: result[0],
+                    });
+                }
+                else {
+                    res.json({
+                        status: res.statusCode,
+                        message: "unregistered user"
+                    })
+                }
+            })
+        }
     })
 }
 
-// app.listen(port, () => {
-//     console.log(`server is running at http://localhost:${port}`);
-// });
 
 module.exports = {
     fetchUser,
     fetchUserByID,
     fetchInsertUser,
     fetchDeleteUser,
+    loginUser,
+    updateUserInfo
+
 }

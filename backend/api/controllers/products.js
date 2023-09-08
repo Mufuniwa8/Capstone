@@ -44,10 +44,10 @@ const {
     const data = req.body;
     fetchInsertProducts(data, (error, results) => {
         if (error) {
-            res.send(error);
+            res.status(500).json({ error: "Internal Error" });
         }
         else{
-            res.json(results);
+            res.status(201).json(results); 
         }
     }); 
   };

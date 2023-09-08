@@ -11,66 +11,63 @@ const database = require("../config/index.js");
 // app.use(bodyParser.json());
 // app.use(cors());
 
-
 //user
 
 const fetchCart = (result) => {
-    const query = `select cartID, cartImage, cartName, cartColor, cartPrice from cart;`;
-    database.query(query, (error, res) => {
-     
-        if (error) {
-            console.log(error);
-            result(error, null);
-            return;
-        } else {
-            result(null, res);
-        }
-    });
+  const query = `select cartID, cartImage, cartName, cartColor, cartPrice from cart;`;
+  database.query(query, (error, res) => {
+    if (error) {
+      console.log(error);
+      result(error, null);
+      return;
+    } else {
+      result(null, res);
+    }
+  });
 };
-
-
 
 // app.listen(port, () => {
 //     console.log(`server is running at http://localhost:${port}`);
 // });
 const fetchCartByID = (id, res) => {
-    const query = `select cartID, cartImage, cartName, cartColor, cartPrice from cart where cartID = ${id};`;
-    database.query(query, [id], (error, data) => {
-        if (error) throw error;
-        res.json({status: res.statusCode, results: data});
-    });
+  const query = `select cartID, cartImage, cartName, cartColor, cartPrice from cart where cartID = ${id};`;
+  database.query(query, [id], (error, data) => {
+    if (error) throw error;
+    res.json({ status: res.statusCode, results: data });
+  });
 };
 
-
-
-const fetchInsertCart = (req,res) => {
- const query = `update cart set? where cartID = ?;`;
- database.query(query, [req.body, req.params.id], (error) => {
-   if (error) {
-            console.log(error);
-            result(error, null);
-            return;
-        } else {
-            result(null, res);
-        }
- })   
+const fetchInsertCart = (data, result) => {
+  database.query(
+    "update cart set? where cartID = ?;",
+    [data],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        result(error, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
 };
 
-const fetchDeleteCart = (req, res) => {
-    const query = `delete from cart where cartID = ${req.params.id};`
-    database.query(query, (error) => {
-        if (error) throw error;
-        res.json(
-            {
-                status: res.statusCode,
-                message: "The user record has been deleted."
-            }
-        )
-    })
-}
+const fetchDeleteCart = (id, result) => {
+  database.query(
+    "delete from cart where cartID = ?",
+    [id],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        result(error, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
 
-
-// //end of user 
+// //end of user
 
 // //products
 
@@ -86,8 +83,8 @@ const fetchDeleteCart = (req, res) => {
 //     });
 // });
 module.exports = {
-    fetchCart,
-    fetchCartByID,
-    fetchInsertCart,
-    fetchDeleteCart,
+  fetchCart,
+  fetchCartByID,
+  fetchInsertCart,
+  fetchDeleteCart,
 };

@@ -2,6 +2,8 @@ const express = require('express')
 const routes = express.Router()
 const bodyParser = require('body-parser')
 const path = require('path')
+const bcrypt = require("bcrypt")
+const {createToken} = require("../middleware/AuthenticateUser")
 const user = require('../models/user')
 
 const {
@@ -39,15 +41,27 @@ const {
 
   const createUser = (req, res) => {
     const data = req.body;
-    fetchInsertUser(data, (error, results) => {
-        if (error) {
-            res.send(error);
+        if (!data.userPassword) {
+            return res.status(400).json({ error: "Required password"});
         }
-        else{
-            res.json(results);
-        }
-    }); 
-  };
+        data.userPassword = bcrypt.hashSync(data.userPassword, 10);
+
+        const User = {
+            email: data.email,
+            userPassword: data.Password,
+        };
+
+        let token = createToken(User);
+
+        fetchInsertUser(data, (error, results) => {
+            if (error) {
+                res.status(500).json({error: "A error came up while creating a user"});
+            }
+            else {
+                res.status(201).json({token, results});
+            }
+        });
+    }; 
 
 
 
