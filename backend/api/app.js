@@ -5,11 +5,14 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
+const mysql = require("mysql");
 const cors = require('cors');
 const port = +process.env.PORT || 2003;
 
 //Routes requirement
-const routes = require("./routes/index");
+const routes = require("./routes/index.js");
+
+
 
 app.use((req, res, next) =>{
     res.header("Access-Control-Allow-Origin", "*");
@@ -33,7 +36,7 @@ app.get("/", function (req, res) {
     res.json({ message: "My database" });
 });
     
-app.use("/", routes);
+// app.use("/", routes);
     
 
 

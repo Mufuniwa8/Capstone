@@ -12,6 +12,7 @@ const {
     fetchInsertUser,
     fetchDeleteUser,
     fetchUpdateUser
+    // userRegister,
   } = require("../models/user");
   
   const allUser = (req, res) => {
@@ -44,16 +45,17 @@ const {
         if (!data.userPassword) {
             return res.status(400).json({ error: "Required password"});
         }
-        data.userPassword = bcrypt.hashSync(data.userPassword, 10);
+        data.userPassword = bcrypt.hash(data.userPassword, 10);
 
         const User = {
             email: data.email,
-            userPassword: data.Password,
+            userPassword: data.userPassword,
         };
 
         let token = createToken(User);
 
         fetchInsertUser(data, (error, results) => {
+            
             if (error) {
                 res.status(500).json({error: "A error came up while creating a user"});
             }
@@ -69,10 +71,13 @@ const {
     const userID = req.params.userID;
     fetchDeleteUser(userID, (error,results) => {
         if (error) {
-            res.send(error);
+            res.status(500).json({ error: "Server error"});
+        }
+        else if (results.affectedRows === 0) {
+            res.status(404).json({ error: "User not found"});
         }
         else{
-            res.json(results);
+            res.status(204).send();
         }
     });
   };
@@ -80,12 +85,15 @@ const {
   const updateUserInfo = (req,res) => {
     const userID = req.params.userID;
     const newData = req.body;
-    fetchUpdateUser(userID, newData, (error, results) => {
+    fetchUpdateUser(userID, data, (error, results) => {
             if (error) {
-                    res.send(error);
+                    res.status(500).json({ error: "Server error"});
         }
-        else{
-            res.json(results);
+        else if (results.affectedRows === 0) {
+            res.status(404).json({ error: "User not found"});
+        }
+        else {
+            res.status(200).json(results);
         }
     });
   };
@@ -95,5 +103,5 @@ const {
   showAUser,
   createUser,
   removeUser,
-  updateUserInfo,
+  updateUserInfo
 };

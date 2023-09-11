@@ -2,8 +2,11 @@ require('dotenv').config();
 const cors = require("cors");
 const express = require("express");
 const app = express();
+const { createToken } = require('../middleware/AuthenticateUser')
+const userRegister = require("../models/user");
 const database = require("../config/index.js");
 const path = require("path");
+const { compare } = require("bcrypt");
 // const port = +process.env.PORT || 3301;
 const bodyParser = require("body-parser");
 
@@ -79,35 +82,35 @@ const fetchDeleteUser = (id, result) => {
         );
     };
 
-    //register
-    const registerUser = (req, res) => {
-        {}
-    }
-    //end of register
+
 
 const loginUser = (req, res) => {
     const { email, userPassword } = req.body;
-    const query = `Select firstName, lastName, userRole, userRole, userProfile from User where email = '${email}'`;
-    database.query(query, async (error, results) => {
+    const query = `SELECT firstName, lastName, userRole, userPassword, userRole, userProfile FROM User WHERE email = '${email}'`;
+    database.query(query, async (error, result) => {
         if (error) throw error;
-        if (!results?.length) {
+        if (!result?.length) {
             res.json({
                 status: res.statusCode,
                 message: "Invalid email",
             });
         }
         else {
-            await compare(userPassword, result[0].userPassword, (cError, cResult) => {
+            const hashed = result[0].userPassword
+            console.log
+            console.log(hashed)
+            console.log(userPassword)
+            await compare(userPassword, hashed, (cError, cResult) => {
                 if (cError) throw cError;
                 const token = createToken({
                     email,
                     userPassword,
                 });
-                res.cookie("ApprovedUser", token, {
+                res.cookie("LegitUser", token, {
                     maxAge: 100,
                     httpOnly: true,
                 });
-                if (cResults) {
+                if (cResult) {
                     res.json({
                         message: "enter another token",
                         token,
@@ -117,7 +120,7 @@ const loginUser = (req, res) => {
                 else {
                     res.json({
                         status: res.statusCode,
-                        message: "unregistered user"
+                        message: "Registered user"
                     })
                 }
             })
@@ -132,6 +135,7 @@ module.exports = {
     fetchInsertUser,
     fetchDeleteUser,
     loginUser,
+    // userRegister,
     updateUserInfo
 
 }

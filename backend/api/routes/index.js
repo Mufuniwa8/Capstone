@@ -24,11 +24,10 @@ const {
   showAUser,
   createUser,
   removeUser,
-  updateUserInfo
-  // registerUser
+  updateUserInfo,
+  // userRegister
 } = require("../controllers/user")
 const {loginUser} = require("../models/user");
-const {registerUser} = require("../models/user");
 
 router.get("/User", allUser);
 
@@ -36,7 +35,6 @@ router.get("/User/:userID", showAUser);
 
 router.post("/User", createUser);
 
-router.post("/User/register", registerUser);
 
 router.post("/User/login", loginUser);
 
