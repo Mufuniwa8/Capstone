@@ -37,11 +37,11 @@ const fetchCartByID = (id, res) => {
   });
 };
 
-const fetchInsertCart = (data, result) => {
+const fetchInsertCart = (data, res) => {
   database.query(
     "update cart set? where cartID = ?;",
     [data],
-    (error, results) => {
+    (error, result) => {
       if (error) {
         console.log(error);
         result(error, null);
