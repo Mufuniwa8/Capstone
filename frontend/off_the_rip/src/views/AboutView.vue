@@ -26,7 +26,7 @@
       <div class="members-img">
          <img class="about-img" src="https://i.postimg.cc/5t5vTLnm/C12-Mufuniwa-Mbedzi-1.jpg" alt="">
          <h4>Mufuniwa Mbedzi</h4>
-        <p>about-img</p>
+        <p>Fullstack developer</p>
       </div>
       <div class="members-img">
          <img class="about-img" src="https://i.postimg.cc/HLS5Td1J/C12-Tara-Snell-2.jpg" alt="">
@@ -60,7 +60,7 @@
 }
 
 .shops-container {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   height: 200px;
   width: 350px;
   margin: 50px;
@@ -68,6 +68,7 @@
 .shop-img {
   width: 350px;
   height: 200px;
+  object-fit: cover;
 }
 .members-container {
   display: grid;
@@ -78,7 +79,7 @@
   gap: 50px;
 }
 .members-img {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   width: 300px;
   height: 400px;
   background-color: rgba(217, 217, 217, 1);
@@ -86,9 +87,10 @@
 }
 .about-img {
   width: 260px;
-  height: 300px;
+  height: 310px;
   margin: 15px;
-  border: 2px solid white;
+  /* border: 2px solid white; */
+  object-fit: cover;
 }
 
 </style>

@@ -18,7 +18,7 @@
     <div class="selling">
       <img
         class="sell-img"
-        src="https://i.postimg.cc/029WNL5d/IMG-2188.jpg"
+        src="https://i.postimg.cc/FsmyfDYC/IMG-2139.jpg"
         alt=""
       />
       <p>New Balance 550 <br> Black & white <br> R2199,99</p>
@@ -34,7 +34,7 @@
     <div class="selling-2">
       <img
         class="sell-img"
-        src="https://i.postimg.cc/029WNL5d/IMG-2188.jpg"
+        src="https://i.postimg.cc/nhFGW0Z9/IMG-2140.jpg"
         alt=""
       />
       <p>Nike Jordan 4s <br> Black & white <br> R3499,99</p>
@@ -51,7 +51,7 @@
     <div class="selling-3">
       <img
         class="sell-img"
-        src="https://i.postimg.cc/029WNL5d/IMG-2188.jpg"
+        src="https://i.postimg.cc/0rg7Z0nj/IMG-2141.jpg"
         alt=""
       />
       <p>Nike M2K Tekno <br> white <br> R3000,00</p>

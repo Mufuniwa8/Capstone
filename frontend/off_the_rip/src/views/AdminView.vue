@@ -21,17 +21,18 @@
 
 <table>
   <tr>
-    <th> <img :src="pro.proImage" alt="pro.proImage"></th>
-    <th>{{ pro.proName }}</th>
-    <th>{{ pro.Color }}</th>
-    <th>{{ pro.proPrice }}</th>
     <th>Action</th>
-  </tr>
-  <tr>
     <th>image</th>
     <th>Product Name</th>
     <th>Color</th>
     <th>Price</th>
+    <!-- <th><button>edit</button><button>delete</button></th> -->
+  </tr>
+  <tr v-for="pro in products" :key="pro">
+    <th> <img :src="pro.proImage" alt="pro.img"></th>
+    <th>{{ pro.proName }}</th>
+    <th>{{ pro.Color }}</th>
+    <th>{{ pro.proPrice }}</th>
     <th><button>edit</button><button>delete</button></th>
   </tr>
 </table>
@@ -40,12 +41,17 @@
 
   <script>
 
+
 export default {
+  products() {
+    return this.$store.state.products;
+  },
   User() {
       return this.$store.state.User;
     },
     mounted() {
-    this.$store.dispatch("fetchUser")
+    this.$store.dispatch("fetchUser"),
+     this.$store.dispatch("fetchProducts");
   },
 }
 
