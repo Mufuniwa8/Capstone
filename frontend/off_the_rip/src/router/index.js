@@ -51,6 +51,13 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/SingleView.vue"),
       props: true,
   },
+  {
+    path: "/user/edit/:id",
+    name: "user add",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/EditUserView.vue"),
+      props: true,
+  },
 ];
 
 const router = createRouter({

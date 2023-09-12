@@ -5,11 +5,12 @@ const myURL ="https://capstone-api-r3rp.onrender.com/"
 
 export default createStore({
   state: {
-    products: [],
+    products: null,
     product: null,
     User: null,
-    Users:null,
+    users: null,
     cart: null,
+    msg: null,
   },
 
   mutations: {
@@ -22,11 +23,15 @@ export default createStore({
     fetchUser(state,User) {
       state.User = User;
     },
-    fetchUsers(state,Users) {
-      state.Users = Users;
+    fetchUsers(state,users) {
+      state.users = users;
     },
+
     fetchCart(state,cart) {
       state.cart = cart;
+    },
+    setMsg(state,msg) {
+      state.msg = msg;
     }
   },
   actions: {
@@ -46,22 +51,37 @@ export default createStore({
       }
       catch(error) {alert(error.message)}
     },
-    async fetchUsers(context) {
+    async updatedUser(context, editedUser) {
       try {
-        let res = await axios.get(`${myURL}Users`);
-        let Users = await res.data
-        context.commit("fetchUsers", Users)
+        const {data} = await axios.patch(
+          `${myURL}user/${editedUser.userID}`,
+          editedUser
+        );
+        const {msg} = await data;
+        if (msg) {
+          context.commit("setMsg", msg)
+        }
+      } catch (e) {
+        context.commit("setMsg", "An Error Has Occurred.")
       }
-      catch(error) {alert(error.message)}
     },
-    async fetchUser(context, id) {
+    async fetchUser(context) {
       try {
-        let res = await axios.get(`${myURL}User/${id}`);
+        let res = await axios.get(`${myURL}User`);
         let User = await res.data
         context.commit("fetchUser", User)
       }
       catch(error) {alert(error.message)}
     },
+    async fetchUsers(context, id) {
+      try {
+        let res = await axios.get(`${myURL}User/${id}`);
+        let users = await res.data
+        context.commit("fetchUsers", users)
+      }
+      catch(error) {alert(error.message)}
+    },
+    
     async fetchCart(context) {
       try {
         let res = await axios.get(`${myURL}cart`);

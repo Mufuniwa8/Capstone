@@ -63,6 +63,7 @@
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -78,6 +79,7 @@ export default {
     products() {
       return this.$store.state.products;
     },
+    
     filteredProducts() {
       let filtered = this.products;
 
