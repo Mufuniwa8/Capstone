@@ -61,13 +61,14 @@ const fetchDeleteUser = (id, result) => {
     };
 
     const updateUserInfo = (id, data, result) => {
-        database.query("UPDATE User SET firstName = ?, lastName = ?, userRole = ?, userPassword = ?, userProfile = ?",
+        database.query("UPDATE User SET firstName = ?, lastName = ?, userRole = ?, userPassword = ?, userProfile = ?, email = ?,",
         [
             data.firstName,
             data.lastName,
             data.userRole,
             data.userPassword,
             data.userProfile,
+            data.email,
             id,
         ],
         (error, results) => {
