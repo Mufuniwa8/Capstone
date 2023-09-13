@@ -19,12 +19,13 @@ export default {
   product() {
     return this.$store.state.product;
   },
-  id() {
-    return this.$store.param;
-  },
+  // id() {
+  //   return this.$store.param;
+  // },
 },
 mounted() {
-  this.$store.dispatch("fetchProduct", this.id)
+  this.$store.dispatch("fetchProduct", this.id);
+  this.$store.dispatch("fetchProducts");
 }
 }
 
