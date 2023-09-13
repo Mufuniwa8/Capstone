@@ -65,6 +65,7 @@ export default {
   comments: {
     EditComp,
     ProdEditComp,
+    
   },
   computed:{
     products() {

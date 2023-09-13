@@ -59,7 +59,7 @@ const routes = [
       props: true,
   },
   {
-    path: "/product/edit/:id",
+    path: "/products/edit/:id",
     name: "product add",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ProdEditView.vue"),

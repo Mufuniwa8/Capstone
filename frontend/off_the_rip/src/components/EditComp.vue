@@ -1,27 +1,13 @@
 <template>
     <div>
         <div class="user-inputs">
-      <label for="firstName">First Name</label>
-      <input v-model="User.firstName" type="text" />
-      <label for="firstName">Last Name</label>
-      <input v-model="User.lastName" type="text" />
-      <label for="Role">Role</label>
-      <input v-model="User.userRole" type="text" />
-      <label for="password">Enter Password</label>
-      <input v-model="User.userPassword" type="text" />
-      <label for="profile">Image</label>
-      <input v-model="User.userProfile" type="text" />
-      <!-- <label for="firstName">First Name</label>
-      <input type="text">
-      <label for="lastName">Last Name</label>
-      <input type="text">
-      <label for="userRole">Role</label>
-      <input type="text">
-      <label for="userPassword">Password</label>
-      <input type="text">
-      <label for="userProfile">Profile</label>
-      <input type="text"> -->
-      <button @click="fetchUpdateUser">Add User</button>
+      <input class="inputs" v-model="User.firstName" type="text" placeholder="First Name"/>
+      <input class="inputs" v-model="User.lastName" type="text" placeholder="Last Name"/>
+      <input class="inputs" v-model="User.userRole" type="text" placeholder="Role"/>
+      <input class="inputs" v-model="User.userPassword" type="text" placeholder="Password"/>
+      <input class="inputs" v-model="User.userProfile" type="text" placeholder="Profile"/>
+      <hr class="hr">
+      <button class="btn-user" @click="fetchUpdateUser">Add User</button>
     </div>
     </div>
 </template>
@@ -86,3 +72,33 @@ export default {
 };
 
 </script>
+
+<style>
+
+.user-inputs {
+  display: grid;
+  grid-template-columns: auto;
+  gap: 10px;
+  width: auto;
+  margin: 100px;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid black; */
+  color: black;
+  padding: 5px;
+}
+.inputs {
+  background-color: rgba(217, 217, 217, 1);
+  /* color: black ; */
+  padding: 10px;
+border: none;
+text-align: center;
+}
+.btn-user {
+  background-color: rgba(154, 13, 13, 1);
+  color: white;
+  width: 100px;
+}
+
+
+</style>
