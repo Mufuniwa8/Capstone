@@ -21,7 +21,7 @@
       <input type="text">
       <label for="userProfile">Profile</label>
       <input type="text"> -->
-      <button @click="updateUserInfo">Add User</button>
+      <button @click="fetchUpdateUser">Add User</button>
     </div>
     </div>
 </template>
@@ -44,7 +44,7 @@ export default {
     };
   },
   methods: {
-  async  updateUserInfo() {
+  async  fetchUpdateUser() {
         // this.$store.dispatch("updatedUser", this.editedUser);
         // this.$store.dispatch("fetchUsers")
         try {
