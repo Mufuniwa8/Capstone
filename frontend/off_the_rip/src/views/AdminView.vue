@@ -56,8 +56,12 @@
 
 <script>
 import axios from 'axios';
+import EditComp from '@/components/EditComp.vue';
 
 export default {
+  comments: {
+    EditComp,
+  },
   computed:{
     products() {
     return this.$store.state.products;
