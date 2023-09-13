@@ -13,6 +13,8 @@ const {
     fetchProductsByID,
     fetchInsertProducts,
     fetchDeleteProducts,
+    updateProductInfo
+
   } = require("../models/product");
   
   const allProducts = (req, res) => {
@@ -66,10 +68,10 @@ const {
     });
   };
 
-  const updateProductInfo = (req,res) => {
+  const fetchUpdateProducts = (req,res) => {
     const proID = req.params.proID;
     const newData = req.body;
-    fetchUpdateProducts(proID, newData, (error, results) => {
+    updateProductInfo(proID, newData, (error, results) => {
             if (error) {
                     res.send(error);
         }
@@ -79,12 +81,13 @@ const {
     });
   };
 
+  
   module.exports = {
   allProducts,
   showAProducts,
   createProducts,
   removeProducts,
-  updateProductInfo,
+  fetchUpdateProducts,
 };
 
 

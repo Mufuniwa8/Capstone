@@ -6,7 +6,7 @@ const {
   showAProducts,
   createProducts,
   removeProducts,
-  updateProductInfo
+  fetchUpdateProducts
 } = require("../controllers/products")
 
 router.get("/products", allProducts);
@@ -17,7 +17,7 @@ router.post("/products", createProducts);
 
 router.delete("/products/delete/:proID", removeProducts);
 
-router.put("/products/update/:proID", updateProductInfo);
+router.put("/products/update/:proID", fetchUpdateProducts);
 
 const {
   allUser,
