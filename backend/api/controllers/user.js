@@ -11,7 +11,8 @@ const {
     fetchUserByID,
     fetchInsertUser,
     fetchDeleteUser,
-    fetchUpdateUser
+    updateUserInfo
+
     // userRegister,
   } = require("../models/user");
   
@@ -82,10 +83,10 @@ const {
     });
   };
 
-  const updateUserInfo = (req,res) => {
-    const userID = req.params.userID;
-    const newData = req.body;
-    fetchUpdateUser(userID, data, (error, results) => {
+  const fetchUpdateUser  = (req,res) => {
+    const id = req.params.id;
+    const data = req.body;
+    updateUserInfo(id, data, (error, results) => {
             if (error) {
                     res.status(500).json({ error: "Server error"});
         }
@@ -103,5 +104,5 @@ const {
   showAUser,
   createUser,
   removeUser,
-  updateUserInfo
+  fetchUpdateUser
 };

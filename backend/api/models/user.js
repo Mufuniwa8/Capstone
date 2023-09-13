@@ -61,7 +61,7 @@ const fetchDeleteUser = (id, result) => {
     };
 
     const updateUserInfo = (id, data, result) => {
-        database.query("UPDATE User SET firstName = ?, lastName = ?, userRole = ?, userPassword = ?, userProfile = ?, email = ?,",
+        database.query("UPDATE User SET firstName = ?, lastName = ?, userRole = ?, userPassword = ?, userProfile = ?, email = ? WHERE userID = ?",
         [
             data.firstName,
             data.lastName,
@@ -74,7 +74,7 @@ const fetchDeleteUser = (id, result) => {
         (error, results) => {
             if (error) {
                 console.log(error);
-                result({ error: "Could'nt update user"}, null)
+                result({ error: "Could'nt update user"}, null);
             }
             else {
                 result(null, results);
@@ -138,5 +138,4 @@ module.exports = {
     loginUser,
     // userRegister,
     updateUserInfo
-
 }

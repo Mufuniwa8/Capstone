@@ -24,7 +24,7 @@ const {
   showAUser,
   createUser,
   removeUser,
-  updateUserInfo,
+  fetchUpdateUser,
   // userRegister
 } = require("../controllers/user")
 const {loginUser} = require("../models/user");
@@ -40,7 +40,7 @@ router.post("/User/login", loginUser);
 
 router.delete("/User/delete/:userID", removeUser);
 
-router.put("/User/update/:userID", updateUserInfo);
+router.put("/User/update/:id", fetchUpdateUser);
 
 
 const {
