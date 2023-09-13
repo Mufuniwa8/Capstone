@@ -58,6 +58,13 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/EditUserView.vue"),
       props: true,
   },
+  {
+    path: "/product/edit/:id",
+    name: "product add",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ProdEditView.vue"),
+      props: true,
+  },
 ];
 
 const router = createRouter({

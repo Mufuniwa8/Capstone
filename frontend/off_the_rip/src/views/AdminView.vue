@@ -17,7 +17,9 @@
             <td class="edit-prod">{{ pro.proColor }}</td>
             <td class="edit-prod">R{{ pro.proPrice }}</td>
             <td class="edit-prod"><img class="prod-img" :src="pro.proImage" :alt="pro.img" /></td>
-            <td class="edit-prod"><div class="btn-container"><button class="edit-btn">Edit</button>
+            <td class="edit-prod"><div class="btn-container">
+              <router-link class="edit-btn" :to="{ name: 'product add', params: {id: pro.proID} }">edit</router-link>
+              <!-- <button class="edit-btn">Edit</button> -->
               <button @click="deletePro(pro.proID)" class="delete-btn">Delete</button></div></td>
           </tr>
         </tbody>
@@ -57,10 +59,12 @@
 <script>
 import axios from 'axios';
 import EditComp from '@/components/EditComp.vue';
+import ProdEditComp from '@/components/ProdEditComp.vue';
 
 export default {
   comments: {
     EditComp,
+    ProdEditComp,
   },
   computed:{
     products() {
