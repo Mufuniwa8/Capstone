@@ -53,7 +53,7 @@ const fetchInsertProducts = (data, result) => {
 };
   
 const updateProductInfo = (id, data, result) => {
-  db.query("UPDATE products SET proImage = ?, proName = ?, proColor = ?, proPrice = ?, proStock = ?, proCategory =?", 
+  db.query("UPDATE products SET proImage = ?, proName = ?, proColor = ?, proPrice = ?, proStock = ?, proCategory =? WHERE proID = ?", 
   [
     data.proImage,
     data.proName,

@@ -70,13 +70,16 @@ const {
 
   const fetchUpdateProducts = (req,res) => {
     const proID = req.params.proID;
-    const newData = req.body;
-    updateProductInfo(proID, newData, (error, results) => {
+    const data = req.body;
+    updateProductInfo(proID, data, (error, results) => {
             if (error) {
-                    res.send(error);
+                    res.status(500).json({ error: "Server error"});
         }
-        else{
-            res.json(results);
+        else if (results.affectedRows ===0) {
+            res.status(404).json({ error: "Products not found"});
+        }
+        else {
+            res.status(200).json(results);
         }
     });
   };
