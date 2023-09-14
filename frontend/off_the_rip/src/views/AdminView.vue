@@ -8,7 +8,9 @@
             <th class="table-header">Color</th>
             <th class="table-header">Price</th>
             <th class="table-header">Image</th>
-            <th class="table-header">Action</th>
+            <th class="table-header">
+              <router-link :to="{name: 'prod add', }">Add new product</router-link>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +36,9 @@
             <th class="table-header">Role</th>
             <th class="table-header">Password</th>
             <th class="table-header">image</th>
-            <th @click="addNew()" class="table-header">Action</th>
+            <th class="table-header">
+              <router-link :to="{name: 'users add', }">Add new User</router-link>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -65,6 +69,7 @@ export default {
   comments: {
     EditComp,
     ProdEditComp,
+    // AddProdComp,
     
   },
   computed:{

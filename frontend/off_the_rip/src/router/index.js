@@ -65,6 +65,18 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/ProdEditView.vue"),
       props: true,
   },
+  {
+    path: "/admin/add",
+    name: "prod add",
+    component: () => 
+    import("../views/AddProdView.vue"),
+  },
+  {
+    path: "/admin/add",
+    name: "users add",
+    component: () => 
+    import("../views/AddUserView.vue"),
+  },
 ];
 
 const router = createRouter({

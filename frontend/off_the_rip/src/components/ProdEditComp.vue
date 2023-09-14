@@ -1,15 +1,15 @@
 <template>
   <div>
+    <h2 class="h2">Edit a single product</h2>
     <div class="user-inputs">
-      <label for="proName">Product Name</label>
-      <input v-model="product.proName" type="text" />
-      <label for="proColor">Color</label>
-      <input v-model="product.proColor" type="text" />
-      <label for="proPrice">Price</label>
-      <input v-model="product.proPrice" type="text" />
-      <label for="proImage">Image</label>
-      <input v-model="product.proImage" type="text" />
-      <button @click="fetchUpdateProducts">Add User</button>
+      <input class="inputs" placeholder="Name" v-model="product.proName" type="text" />
+      <input class="inputs" placeholder="Color" v-model="product.proColor" type="text" />
+      <input class="inputs" placeholder="Price" v-model="product.proPrice" type="text" />
+      <input class="inputs" placeholder="Stock" v-model="product.proStock" type="text" />
+      <input class="inputs" placeholder="Category" v-model="product.proCategory" type="text" />
+      <input class="inputs" placeholder="Image/URL" v-model="product.proImage" type="text" />
+      <hr>  
+      <button class="btn-user" @click="fetchUpdateProducts">Add User</button>
     </div>
   </div>
 </template>
@@ -24,6 +24,8 @@ export default {
         proName: "",
         proColor: "",
         proPrice: "",
+        proStock: "",
+        proCategory: "",
         proImage: "",
       },
     };
@@ -38,6 +40,8 @@ export default {
             proName: this.product.proName,
             proColor: this.product.proColor,
             proPrice: this.product.proPrice,
+            proStock: this.product.proStock,
+            proCategory: this.product.proCategory,
             proImage: this.product.proImage,
           }
         );
@@ -45,6 +49,8 @@ export default {
         this.product.proName = "";
         this.product.proColor = "";
         this.product.proPrice = "";
+        this.product.proStock = "";
+        this.product.proCategory = "";
         this.product.proImage = "";
         this.$router.push("/admin");
         alert("A product has been updated");
@@ -73,7 +79,7 @@ export default {
   grid-template-columns: auto;
   gap: 10px;
   width: auto;
-  margin: 100px;
+  margin: 90px;
   justify-content: center;
   align-items: center;
   /* border: 2px solid black; */
@@ -91,6 +97,10 @@ text-align: center;
   background-color: rgba(154, 13, 13, 1);
   color: white;
   width: 100px;
+}
+.h2 {
+  padding: 10px;
+  margin: 50px;
 }
 
 
