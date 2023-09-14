@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="user-inputs">
-      <input class="inputs" v-model="Users.firstName" type="text" placeholder="First Name"/>
-      <input class="inputs" v-model="Users.lastName" type="text" placeholder="Last Name"/>
-      <input class="inputs" v-model="Users.userRole" type="text" placeholder="Role"/>
-      <input class="inputs" v-model="Users.userPassword" type="text" placeholder="Password"/>
-      <input class="inputs" v-model="Users.userProfile" type="text" placeholder="Profile"/>
+      <input class="inputs" v-model="users.firstName" type="text" placeholder="First Name"/>
+      <input class="inputs" v-model="users.lastName" type="text" placeholder="Last Name"/>
+      <input class="inputs" v-model="users.userRole" type="text" placeholder="Role"/>
+      <input class="inputs" v-model="users.userPassword" type="text" placeholder="Password"/>
+      <input class="inputs" v-model="users.userProfile" type="text" placeholder="Profile"/>
       <hr class="hr">
       <button class="btn-user" @click="createUser">Add User</button>
     </div>
@@ -19,8 +19,8 @@ import axios from 'axios';
 export default {
   data() {
     return {
-        Users: {
-            userID: "",
+        users: {
+            // userID: "",
             firstName: "",
             lastName: "",
             userRole: "",
@@ -37,20 +37,20 @@ export default {
           await axios.post(
             "https://capstone-api-r3rp.onrender.com/User/",
             {
-              userID: this.Users.userID,
-            firstName: this.Users.firstName,
-            lastName: this.Users.lastName,
-            userRole: this.Users.userRole,
-            userPassword: this.Users.userPassword,
-            userProfile: this.Users.userProfile,
+              // userID: this.users.userID,
+            firstName: this.users.firstName,
+            lastName: this.users.lastName,
+            userRole: this.users.userRole,
+            userPassword: this.users.userPassword,
+            userProfile: this.users.userProfile,
             }
           );
-          this.Users.userID = "";
-          this.Users.firstName = "";
-          this.Users.lastName = "";
-          this.Users.userRole = "";
-          this.Users.userPassword = "";
-          this.Users.userProfile = "";
+          // this.users.userID = "";
+          this.users.firstName = "";
+          this.users.lastName = "";
+          this.users.userRole = "";
+          this.users.userPassword = "";
+          this.users.userProfile = "";
           this.$router.push("/admin");
           alert("A user has been updated");
         }
@@ -59,16 +59,16 @@ export default {
         }
     },
   },
-//   props: ["id"],
-//   computed: {
-//     Users() {
-//         return this.$store.state.users;
-//     },
-//   },
-//   mounted() {
-//     this.$store.dispatch("fetchUser");
-//     this.$store.dispatch("fetchUsers", this.id);
-//   }
+  props: ["id"],
+  computed: {
+    Users() {
+        return this.$store.state.users;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("fetchUser");
+    this.$store.dispatch("fetchUsers", this.id);
+  }
 };
 
 </script>

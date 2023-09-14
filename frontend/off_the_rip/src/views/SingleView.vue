@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="products-container">
-  <div class="products" v-for="product in filteredProducts" :key="product.id">
+  <div class="products" v-for="product in filteredProducts" :key="product.proID">
     <img class="pro-img" :src="product.proImage" :alt="product.img" />
     <p>{{ product.proName }} <br> {{ product.proColor }} <br> {{ product.proPrice }}</p>
     <div class="pro-btn">
@@ -14,19 +14,17 @@
 <script>
 
 export default {
-  props: true,
-  computed: {
-  product() {
+computed: {
+  Product() {
     return this.$store.state.product;
   },
-  // id() {
-  //   return this.$store.param;
-  // },
+  id() {
+    return this.$store.params.id
+  },
 },
 mounted() {
-  this.$store.dispatch("fetchProduct", this.id);
-  this.$store.dispatch("fetchProducts");
-}
+  this.$store.dispatch("fetchProduct", this.id)
+},
 }
 
 </script>

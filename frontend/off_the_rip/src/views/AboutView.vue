@@ -1,5 +1,4 @@
 <template>
-  <div class="about">
     <div class="about-des">
       <p class="about-p">
         
@@ -40,7 +39,7 @@
       </div>
     </div>
     
-  </div>
+
 </template>
 
 
@@ -56,7 +55,7 @@
   display: grid;
   grid-template-columns: auto auto auto;
   /* border: 2px solid black; */
-  height: 300px;
+  /* height: 300px; */
 }
 
 .shops-container {
@@ -74,7 +73,8 @@
   display: grid;
   grid-template-columns: auto auto auto;
   /* border: 2px solid black; */
-  height: 450px;
+  /* height: 450px; */
+  margin: 50px;
   justify-content: center;
   gap: 50px;
 }
@@ -83,7 +83,6 @@
   width: 300px;
   height: 400px;
   background-color: rgba(217, 217, 217, 1);
-
 }
 .about-img {
   width: 260px;
@@ -92,5 +91,67 @@
   /* border: 2px solid white; */
   object-fit: cover;
 }
+
+
+/* media */
+
+@media only screen and (max-width: 300px){
+    /* html,body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+    } */
+    .members-container {
+  display: grid;
+  grid-template-columns: auto;
+  /* border: 2px solid black; */
+  height: 450px;
+  margin: 50px;
+  justify-content: center;
+  gap: 50px;
+}
+}
+
+@media only screen and (max-width: 700px){
+  /* html,body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+ } */
+ .shops {
+  display: grid;
+  grid-template-columns: auto auto;
+  /* border: 2px solid black; */
+  /* height: 300px; */
+ }
+ .members-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  /* border: 2px solid black; */
+  /* height: 450px; */
+  margin: 50px;
+  justify-content: center;
+  gap: 50px;
+ }
+ .shops-container {
+  /* border: 2px solid black; */
+  height: 200px;
+  width: 150px;
+  margin: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.shop-img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  margin: 10px;
+}
+}
+
 
 </style>

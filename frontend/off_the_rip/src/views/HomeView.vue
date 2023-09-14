@@ -184,4 +184,66 @@ align-items: center; */
   background-color: rgba(154, 13, 13, 1);
   color: white;
 }
+
+/* media  */
+
+@media only screen and (max-width: 700px){
+  html,body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+ }
+ .monthly-pro {
+  /* border: 2px solid black; */
+  display: grid !important;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 10px;
+  margin: 50px;
+}
+}
+
+@media only screen and (max-width: 300px) {
+  html,body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+ }
+  .ad-text {
+  /* border: 2px solid black; */
+  position: relative;
+  background-color: white;
+  width: 200px;
+  height: 150px;
+  justify-content: center;
+}
+.btn-products {
+  /* text-decoration: none; */
+  text-align: center;
+  width: 150px;
+  height: 50px;
+  margin-left: 25px;
+  background-color: rgba(154, 13, 13, 1);
+  /* justify-content: center;
+align-items: center; */
+}
+  .monthly-pro {
+  /* border: 2px solid black; */
+  display: grid !important;
+  grid-template-columns: auto !important;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 10px;
+  margin: 50px;
+}
+
+}
+
 </style>

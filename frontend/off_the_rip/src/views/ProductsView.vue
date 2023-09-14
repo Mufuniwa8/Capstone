@@ -54,9 +54,7 @@
       <p>{{ pro.proName }} <br> {{ pro.proColor }} <br> {{ pro.proPrice }}</p>
       <div class="pro-btn">
         <div>
-          <!-- <router-link class="edit-btn" :to="{ name: 'user add', params: {id: users.userID} }">edit</router-link> -->
-          <router-link class="see-more" :to="{name: 'products', param:{id: pro.proId}}">See More</router-link>
-          <!-- <router-link class="see-more">See more</route-link> -->
+          <router-link class="see-more" :to="{name: 'products', params: {id: pro.proId}}">See More</router-link>
         </div>
         <div class="see-more">
           <button class="see-more">+Cart</button>
@@ -69,6 +67,7 @@
 
 <script>
 export default {
+  // props: ["product"],
   data() {
     return {
       selectedFilter: 'all',
@@ -109,8 +108,11 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("fetchProducts")
+    this.$store.dispatch("fetchProducts").then(() => {
+      this.products = this.$store.state.products;
+    });
   },
+  
   methods: {
     selectFilter(filter) {
       this.selectedFilter = filter;

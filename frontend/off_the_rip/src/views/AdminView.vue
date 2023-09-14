@@ -37,7 +37,7 @@
             <th class="table-header">Password</th>
             <th class="table-header">image</th>
             <th class="table-header">
-              <router-link :to="{name: 'users add', }">Add new User</router-link>
+              <router-link :to="{name: 'users add', }">Add new</router-link>
             </th>
           </tr>
         </thead>
