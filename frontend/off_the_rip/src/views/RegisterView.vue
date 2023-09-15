@@ -1,5 +1,6 @@
 <template>
      <div>
+        
         <div class="user-inputs">
       <input class="inputs" v-model="payload.firstName" type="text" placeholder="First Name"/>
       <input class="inputs" v-model="payload.lastName" type="text" placeholder="Last Name"/>
@@ -21,20 +22,20 @@ export default {
         payload: {
             firstName: "",
             lastName: "",
-            email: "",
             userRole: "",
             userPassword: "",
             userProfile: "",
+            email: "",
         },
         loading: false,
-    }
+    };
     },
     methods: {
         async createUser() {
             this.loading = true;
             try {
-                await this.$store.dispatch.post("https://capstone-api-r3rp.onrender.com/User/", this.payload);
-                await new Promise((resolve) => setTimeout(resolve, 5000));
+                await this.$store.dispatch("register", this.payload);
+                await new Promise((resolve) => setTimeout(resolve, 3000));
                 this.resetForm();
             }
             catch (error) {
@@ -51,8 +52,8 @@ export default {
             this.payload.userRole = "",
             this.payload.userPassword = "",
             this.payload.userProfile = ""
-        }
-    }
-}
+        },
+    },
+};
 
 </script>
