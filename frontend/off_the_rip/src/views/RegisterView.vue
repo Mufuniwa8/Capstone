@@ -1,62 +1,58 @@
 <template>
-    <div class="user-inputs">
-      <input
-        class="inputs"
-        v-model="users.email"
-        type="text"
-        placeholder="email@gmail.com"
-      />
-      <input
-        class="inputs"
-        v-model="users.userPassword"
-        type="text"
-        placeholder="Password"
-      />
-      <hr class="hr" />
-      <button class="btn-user" @click="register">Add User</button>
+     <div>
+        <div class="user-inputs">
+      <input class="inputs" v-model="payload.firstName" type="text" placeholder="First Name"/>
+      <input class="inputs" v-model="payload.lastName" type="text" placeholder="Last Name"/>
+      <input class="inputs" v-model="payload.email" type="text" placeholder="Enter email@gmail.com"/>
+      <input class="inputs" v-model="payload.userRole" type="text" placeholder="Role"/>
+      <input class="inputs" v-model="payload.userPassword" type="text" placeholder="Password"/>
+      <input class="inputs" v-model="payload.userProfile" type="text" placeholder="Profile"/>
+      <hr class="hr">
+      <button class="btn-user" @click="createUser">Register</button>
+    </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
-
 
 export default {
-    name: "Home",
-    data(){
+    data() {
         return {
-            users: {
-                email: "",
-                userPassword: "",
-            }
-        }
+        payload: {
+            firstName: "",
+            lastName: "",
+            email: "",
+            userRole: "",
+            userPassword: "",
+            userProfile: "",
+        },
+        loading: false,
+    }
     },
-    computed: {
-        users() {
-            return this.$store.state.User;
-        }
-    },
-    methods:{
-        async register() {
+    methods: {
+        async createUser() {
+            this.loading = true;
             try {
-                await axios.post(
-                    "https://capstone-api-r3rp.onrender.com/User/",
-                    {
-                    email: this.users.email,
-                    userPassword: this.users.userPassword,
-                }
-                );
-                this.users.email = "",
-                this.users.userPassword = "",
-                alert("You have created an account")
+                await this.$store.dispatch.post("https://capstone-api-r3rp.onrender.com/User/", this.payload);
+                await new Promise((resolve) => setTimeout(resolve, 5000));
+                this.resetForm();
             }
             catch (error) {
-                console.log(error)
+                console.error(error);
+            }
+            finally {
+                this.loading = false;
             }
         },
-},
-mounted() {
-    this.$store.dispatch("login", this.User)
-},
+        resetForm() {
+            this.payload.firstName = "",
+            this.payload.lastName = "",
+            this.payload.email = "",
+            this.payload.userRole = "",
+            this.payload.userPassword = "",
+            this.payload.userProfile = ""
+        }
+    }
 }
+
 </script>

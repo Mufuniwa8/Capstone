@@ -23,6 +23,7 @@
           <div class="navbar-nav comp-nav">
             <router-link class="nav-comp" to="/">Home</router-link>
             <router-link class="nav-comp" to="/register">Register</router-link>
+            <router-link class="nav-comp" to="/login">Login</router-link>
             <router-link class="nav-comp" to="/about">About</router-link>
             <router-link class="nav-comp" to="/products">Products</router-link>
             <!-- <router-link to="/product">See more</router-link> -->

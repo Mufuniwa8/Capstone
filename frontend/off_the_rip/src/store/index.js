@@ -1,5 +1,10 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+const { cookies } = useCookies()
+import sa from "sweetalert"
+import {useCookies} from "vue3-cookies"
+import authenticateUser from "@/views/Service/Authenticate"
+import router from '@/router'
 
 const myURL ="https://capstone-api-r3rp.onrender.com/"
 
@@ -11,6 +16,7 @@ export default createStore({
     users: null,
     cart: null,
     msg: null,
+    token: null,
   },
 
   mutations: {
@@ -32,6 +38,9 @@ export default createStore({
     },
     setMsg(state,msg) {
       state.msg = msg;
+    },
+    setToken(state, token) {
+      state.token = token;
     }
   },
   actions: {
@@ -91,5 +100,62 @@ export default createStore({
       catch(error) {alert(error.message)}
     }
   },
- 
+
+  async register (context, payload) {
+    try {
+      const { msg } = (await axios.post(`${myURL}register`, payload)).data;
+      if (msg) {
+        sa({
+          title: "Register",
+          text: msg,
+          icon: "Registered",
+          timer: 5000,
+        });
+        context.dispatch("fetchUser");
+      }else {
+        router.push("/login");
+      }
+      }
+      catch  (e) {
+        context.commit("setMsg", "You have an error");
+      }
+
+    },
+    async login(context, payload) {
+      try {
+        const {msg, token, results} = (
+          await axios.post(`${myURL}login`,payload)
+        ).data
+        if (results) {
+          context.commit("setUser", { results, msg});
+          localStorage.setItem("User", JSON.stringify(results))
+          cookies.set("mannUser", { msg, token, results});
+          authenticateUser.applyToken(token);
+          sa({
+            title: msg,
+            text: `Glad to have you  back ${results?.firstName}`,
+            icon: "Logged in",
+            timer: 2000,
+          });
+          router.push({ name: "home"});
+        }
+        else {
+          sa({
+            title: "error",
+            text: msg,
+            icon: "error",
+            timer: 2000,
+          });
+        }
+      }
+      catch (e) {
+        context.commit("setMsg", "The is an Error!");
+      }
+    },
+      logOut(context) {
+        // context.commit("fetchUser");
+        context.commit("setUser");
+        cookies.remove("mannUser");
+        localStorage.removeItem("User");
+    },
 })
