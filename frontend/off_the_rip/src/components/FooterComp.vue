@@ -25,7 +25,7 @@
 
 .footer {
 color: black;
-border: 2px solid black;
+/* border: 2px solid black; */
 height: 25vh;
 display: grid;
 grid-template-columns: auto auto auto;
@@ -45,5 +45,24 @@ padding: 30px;
 .logo-size {
     font-size: 40px;
 }
-
+@media (max-width: 300px) {
+    .footer {
+color: black;
+/* border: 2px solid black; */
+height: 25vh;
+display: grid;
+grid-template-columns: auto;
+padding: 30px;
+} 
+}
+@media (max-width: 700px) {
+    .footer {
+color: black;
+/* border: 2px solid black; */
+height: 25vh;
+display: grid;
+grid-template-columns: auto;
+padding: 30px;
+} 
+}
 </style>

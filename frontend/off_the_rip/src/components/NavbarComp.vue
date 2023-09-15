@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary">
       <div class="container-fluid">
         <img
           class="logo"
@@ -60,4 +60,32 @@
   object-fit: cover;
 }
 
+@media (max-width: 700px) {
+  .nav-comp {
+  font-size: 35px;
+  padding: 10px !important;
+  text-decoration: none;
+}
+.comp-nav {
+    align-items: center !important;
+    /* border: 2px solid black; */
+    margin-left: 20px;
+    margin-top: 50px;
+    justify-content: center !important;
+}
+}
+@media (max-width: 700px) {
+  .nav-comp {
+  font-size: 35px;
+  padding: 10px !important;
+  text-decoration: none;
+}
+.comp-nav {
+    align-items: center !important;
+    /* border: 2px solid black; */
+    /* margin-left: 20px; */
+    /* margin-top: 50px; */
+    justify-content: center !important;
+}
+}
 </style>

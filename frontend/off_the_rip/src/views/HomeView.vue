@@ -22,14 +22,15 @@
         alt=""
       />
       <p>New Balance 550 <br> Black & white <br> R2199,99</p>
-      <div class="home-btn">
+      <p>Cant go wrong with the Latest New Balance 550s</p>
+      <!-- <div class="home-btn">
         <div>
           <button class="see-more">See more</button>
         </div>
         <div class="see-more">
           <button class="see-more">+Cart</button>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="selling-2">
       <img
@@ -38,15 +39,7 @@
         alt=""
       />
       <p>Nike Jordan 4s <br> Black & white <br> R3499,99</p>
-      
-      <div class="home-btn">
-        <div>
-          <button class="see-more">See more</button>
-        </div>
-        <div class="see-more">
-          <button class="see-more">+Cart</button>
-        </div>
-      </div>
+      <p>Get one of our best Jordans for Woman</p>
     </div>
     <div class="selling-3">
       <img
@@ -55,14 +48,15 @@
         alt=""
       />
       <p>Nike M2K Tekno <br> white <br> R3000,00</p>
-      <div class="home-btn">
+      <p>Why not look clean and fresh with our Tekno?</p>
+      <!-- <div class="home-btn">
         <div>
           <button class="see-more">See more</button>
         </div>
         <div class="see-more">
           <button class="see-more">+Cart</button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -125,6 +119,11 @@ export default {
   text-align: center;
   text-decoration: none;
   margin-bottom: auto;
+  transition: 1s;
+}
+.home-pro:hover {
+  transition: 1s;
+  text-decoration: underline;
 }
 .btn-products {
   /* text-decoration: none; */

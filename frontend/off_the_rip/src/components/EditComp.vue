@@ -94,10 +94,22 @@ export default {
 border: none;
 text-align: center;
 }
+.inputs:hover {
+  transition: 0.1s;
+  width: 250px;
+  height: 55px;
+}
 .btn-user {
   background-color: rgba(154, 13, 13, 1);
   color: white;
   width: 100px;
+  transition: 0.1s;
+  text-decoration: none;
+}
+.btn-user:hover {
+  transition: 0.1s;
+  text-decoration: underline;
+  font-size: 20px;
 }
 
 
