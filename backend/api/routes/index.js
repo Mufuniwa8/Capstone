@@ -35,6 +35,7 @@ router.get("/User/:userID", showAUser);
 
 router.post("/User", createUser);
 
+// router.post("/register", userRegister);
 
 router.post("/User/login", loginUser);
 

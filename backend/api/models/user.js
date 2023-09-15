@@ -59,6 +59,7 @@ const fetchDeleteUser = (id, result) => {
         }
     });
     };
+ 
 
     const updateUserInfo = (id, data, result) => {
         database.query("UPDATE User SET firstName = ?, lastName = ?, userRole = ?, userPassword = ?, userProfile = ?, email = ? WHERE userID = ?",
@@ -136,6 +137,6 @@ module.exports = {
     fetchInsertUser,
     fetchDeleteUser,
     loginUser,
-    // userRegister,
+    userRegister,
     updateUserInfo
 }
