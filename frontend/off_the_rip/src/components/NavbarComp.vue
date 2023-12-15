@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg  bg-body-tertiary">
       <div class="container-fluid">
         <img
           class="logo"
@@ -22,13 +22,17 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav comp-nav">
             <router-link class="nav-comp" to="/">Home</router-link>
-            <router-link class="nav-comp" to="/register">Register</router-link>
-            <router-link class="nav-comp" to="/login">Login</router-link>
+            <!-- <router-link class="nav-comp" to="/register">Register</router-link>
+            <router-link class="nav-comp" to="/login">Login</router-link> -->
             <router-link class="nav-comp" to="/about">About</router-link>
             <router-link class="nav-comp" to="/products">Products</router-link>
             <!-- <router-link to="/product">See more</router-link> -->
             <router-link class="nav-comp" to="/contact">Contact-Us</router-link>
             <router-link class="nav-comp" to="/admin">Admin</router-link>
+            <div class="log-reg">
+              <router-link class="reg-text" to="/register">Register</router-link>
+            <router-link class="reg-text" to="/login">Login</router-link>
+            </div>
             <!-- <a class="nav-link active" aria-current="page" href="#">Home</a>
         <a class="nav-link" href="#">Features</a>
         <a class="nav-link" href="#">Pricing</a>
@@ -42,16 +46,24 @@
 
 <style>
 .nav-comp {
-  font-size: 35px;
+  font-size: 25px;
   padding: 10px !important;
+  text-decoration: none;
+}
+.reg-text {
+  font-size: 20px;
+  padding: 10px;
   text-decoration: none;
 }
 .comp-nav {
     align-items: center !important;
     /* border: 2px solid black; */
-    margin-left: 270px;
-    margin-top: 50px;
+    margin-left: 200px;
+    /* margin-top: 10px; */
     justify-content: center !important;
+}
+.log-reg {
+  margin-left: 200px;
 }
 .logo {
   border-radius: 100px;
